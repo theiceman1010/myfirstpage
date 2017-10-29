@@ -1,29 +1,25 @@
 <HTML>
 <HEAD>
-<script src="//code.jquery.com/jquery-3.2.1.js">
+<script src="http://code.jquery.com/jquery-3.2.1.js">
 </script>
 <STYLE>
-body {
-    font-size: 12pt;
-    font-family: Calibri;
-    padding : 10px;
+* {
+    color: #2b2b2b;
+    font-family: "Roboto Condensed";
 }
-table {
-    border: 1px solid black;
-}
+
 th {
-    border: 1px solid black;
-    padding: 5px;
-    background-color:grey;
-    color: white;
+    text-align: left;
+    color: #4679bd;
 }
-td {
-    border: 1px solid black;
-    padding: 5px;
+
+tbody > tr:nth-of-type(even) {
+    background-color: #daeaff;
 }
-input {
-    font-size: 12pt;
-    font-family: Calibri;
+
+button {
+    cursor: pointer;
+    margin-top: 1rem;
 }
 </STYLE>
 </HEAD>
@@ -31,45 +27,64 @@ input {
 
 <SCRIPT>
 window.onload=function(){
-$("#btnExport").click(function (e) {
-    window.open('data:application/vnd.ms-excel,' + $('#dvData').html());
-    e.preventDefault();
+function download_csv(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV FILE
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // We have to create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Make sure that the link is not displayed
+    downloadLink.style.display = "none";
+
+    // Add the link to your DOM
+    document.body.appendChild(downloadLink);
+
+    // Lanzamos
+    downloadLink.click();
+}
+
+function export_table_to_csv(html, filename) {
+	var csv = [];
+	var rows = document.querySelectorAll("table tr");
+	
+    for (var i = 0; i < rows.length; i++) {
+		var row = [], cols = rows[i].querySelectorAll("td, th");
+		
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+		csv.push(row.join(","));		
+	}
+
+    // Download CSV
+    download_csv(csv.join("\n"), filename);
+}
+
+document.querySelector("button").addEventListener("click", function () {
+    var html = document.querySelector("table").outerHTML;
+	export_table_to_csv(html, "table.csv");
 });
 };
-    function toastalert(){
-        window.alert("hello")
-    };
+
 </SCRIPT>
 
-<input type="button" id="btnExport" value=" Export Table data into Excel " />
-    <button onclick="toastalert()">Toast Alert</button>
-<br/>
-<br/>
-<div id="dvData">
-    <table>
-        <tr>
-            <th>Column One</th>
-            <th>Column Two</th>
-            <th>Column Three</th>
-        </tr>
-        <tr>
-            <td>row1 Col1</td>
-            <td>row1 Col2</td>
-            <td>row1 Col3</td>
-        </tr>
-        <tr>
-            <td>row2 Col1</td>
-            <td>row2 Col2</td>
-            <td>row2 Col3</td>
-        </tr>
-        <tr>
-            <td>row3 Col1</td>
-            <td>row3 Col2</td>
-            <td><a href="http://www.jquery2dotnet.com/">http://www.jquery2dotnet.com/</a>
-            </td>
-        </tr>
-    </table>
-</div>
+<table>
+    <tr><th>Name</th><th>Age</th><th>Country</th></tr>
+    <tr><td>Geronimo</td><td>26</td><td>France</td></tr>
+    <tr><td>Natalia</td><td>19</td><td>Spain</td></tr>
+    <tr><td>Silvia</td><td>32</td><td>Russia</td></tr>
+</table>
+<button>Export HTML table to CSV file</button>
 
 </BODY>
 
