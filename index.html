@@ -2,89 +2,68 @@
 <HEAD>
 <script src="http://code.jquery.com/jquery-3.2.1.js">
 </script>
+
+
 <STYLE>
-* {
-    color: #2b2b2b;
-    font-family: "Roboto Condensed";
-}
 
-th {
-    text-align: left;
-    color: #4679bd;
-}
-
-tbody > tr:nth-of-type(even) {
-    background-color: #daeaff;
-}
-
-button {
-    cursor: pointer;
-    margin-top: 1rem;
-}
 </STYLE>
 </HEAD>
 <BODY>
 
 <SCRIPT>
 window.onload=function(){
-function download_csv(csv, filename) {
-    var csvFile;
-    var downloadLink;
+document.querySelector('a').addEventListener('click', (a) => {
+  let csv = '';
+  const table = document.querySelector('table');
 
-    // CSV FILE
-    csvFile = new Blob([csv], {type: "text/csv"});
+  csv += Array.prototype.map.call(table.querySelectorAll('thead th'), (th) => {
+    return `"${th.innerText.replace(/"/g, '""')}"`;
+  }).join(',') + "\n";
 
-    // Download link
-    downloadLink = document.createElement("a");
+  Array.prototype.forEach.call(table.querySelectorAll('tbody tr'), (tr) => {
+    csv += Array.prototype.map.call(tr.querySelectorAll('td'), (td) => {
+      return `"${td.innerText.replace(/"/g, '""')}"`;
+    }).join(',') + "\n";a
+  });
 
-    // File name
-    downloadLink.download = filename;
-
-    // We have to create a link to the file
-    downloadLink.href = window.URL.createObjectURL(csvFile);
-
-    // Make sure that the link is not displayed
-    downloadLink.style.display = "none";
-
-    // Add the link to your DOM
-    document.body.appendChild(downloadLink);
-
-    // Lanzamos
-    downloadLink.click();
-}
-
-function export_table_to_csv(html, filename) {
-	var csv = [];
-	var rows = document.querySelectorAll("table tr");
-	
-    for (var i = 0; i < rows.length; i++) {
-		var row = [], cols = rows[i].querySelectorAll("td, th");
-		
-        for (var j = 0; j < cols.length; j++) 
-            row.push(cols[j].innerText);
-        
-		csv.push(row.join(","));		
-	}
-
-    // Download CSV
-    download_csv(csv.join("\n"), filename);
-}
-
-document.querySelector("button").addEventListener("click", function () {
-    var html = document.querySelector("table").outerHTML;
-	export_table_to_csv(html, "table.csv");
+  event.target.setAttribute('download', 'csv.csv');
+  event.target.setAttribute('href', URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf8' })));
 });
-};
 
+
+};
 </SCRIPT>
 
+
 <table>
-    <tr><th>Name</th><th>Age</th><th>Country</th></tr>
-    <tr><td>Geronimo</td><td>26</td><td>France</td></tr>
-    <tr><td>Natalia</td><td>19</td><td>Spain</td></tr>
-    <tr><td>Silvia</td><td>32</td><td>Russia</td></tr>
+  <thead>
+    <tr>
+      <th>col 1</th>
+      <th>col 2 "bad"</th>
+      <th>col 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>val 1</td>
+      <td>val 2</td>
+      <td>val 3</td>
+    </tr>
+    <tr>
+      <td>val a</td>
+      <td>val b</td>
+      <td>val c</td>
+    </tr>
+    <tr>
+      <td>"x"</td>
+      <td>y</td>
+      <td>z</td>
+    </tr>
+  </tbody>
 </table>
-<button>Export HTML table to CSV file</button>
+
+<a href="#">download</a>
+
 
 </BODY>
 
