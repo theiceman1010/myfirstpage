@@ -32,7 +32,15 @@ input {
 <button onclick="fillcell()">Fill Cell</button>
 <SCRIPT>
 
-
+	localStorage.setItem("mykey", "blank");
+	
+function getlocalstorage() {
+	var a=2;
+	var b=3;
+	localStorage.setItem("mykey", b);
+	window.alert(localStorage.getItem("something"));
+}
+	
 
 var tableToExcel = (function() {
   var uri = 'data:application/vnd.ms-excel;base64,'
@@ -86,7 +94,7 @@ document.getElementById("getemptycell").innerHTML=getfour;
 
 };
 </script>
-
+	<button onclick="getlocalstorage()">Get Local Storage</button>
 </BODY>
 
 </HTML>
