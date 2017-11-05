@@ -3,12 +3,50 @@
 </head>
 <body>
  <a href="/">go back to the first page</a>
+ </br>
  Hello everyone!
  </br>
+ <div id="result"></div>
+<button onclick="getsum()">Get Sum</button>
+ <button onclick="exportData()">Download CSV</button><br>
+    <a id="results">CSV from local store</a>
 <script> 
 function welcome() {
 window.alert("Welcome to the second page");
 };
+</script>
+<script>
+var a=6;
+var b=4;
+
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+    // Store
+    localStorage.setItem("lastname", "six");
+    // Retrieve
+    document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+} else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+
+function getsum() {
+localStorage.setItem("something", a+b);
+window.alert(localStorage.getItem("something"));
+};
+</script>
+
+<script>
+    function exportData() {
+        var item = localStorage.csv=",what you want in the CSV,";
+
+        var ary = localStorage.getItem( "csv" ); //csv as a string
+        var blob = new Blob([ary], {type: "text/csv"});
+        var url = URL.createObjectURL(blob);
+        var a = document.querySelector("#results"); // id of the <a> element to render the download link
+        a.href = url;
+        a.download = "file.xls";
+
+    }
 </script>
 <button onclick="welcome()">Welcome</button>
 </body>
