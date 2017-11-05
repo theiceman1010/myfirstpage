@@ -34,6 +34,10 @@ input {
 
 	localStorage.setItem("mykey", "blank");
 	
+	function getblankstorage() {
+		window.alert(localStorage.getItem("mykey"));
+	}
+	
 function getlocalstorage() {
 	var a=2;
 	var b=3;
@@ -94,6 +98,7 @@ document.getElementById("getemptycell").innerHTML=getfour;
 
 };
 </script>
+	<button onclick="getblankstorage()">Get Blank Storage</button>
 	<button onclick="getlocalstorage()">Get Local Storage</button>
 </BODY>
 
