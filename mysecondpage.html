@@ -40,7 +40,7 @@ window.alert(localStorage.getItem("something"));
         var item = localStorage.csv=",what you want in the CSV,";
 
         var ary = localStorage.getItem( "csv" ); //csv as a string
-        var blob = new Blob([ary], {type: "text/csv"});
+        var blob = new Blob([ary], {type: "application/vnd.ms-excel"});
         var url = URL.createObjectURL(blob);
         var a = document.querySelector("#results"); // id of the <a> element to render the download link
         a.href = url;
