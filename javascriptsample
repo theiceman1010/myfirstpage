@@ -1,0 +1,39 @@
+<html>
+<head>
+Javascript
+</head>
+<body>
+
+<h2>This page will use vanilla Javascript to</h2>
+
+<ol>
+  <li>Show user interaction with the dom (populate the HTML table)</li>
+  <li>Create a graph using the table data and a canvas</li>
+  <li>Download that graph as an excel spreadsheet</li>
+</ol> 
+
+<table>
+  <tr>
+    <th>Column A</th>
+    <th>Column B</th>
+    <th>Column C</th>
+  </tr>
+  <tr>
+    <td id="cella1"></td>
+    <td id="cellb1"></td>
+    <td id="cellc1"></td>
+  </tr>
+  <tr>
+    <td id="cella2"></td>
+    <td id="cellb2"></td>
+    <td id="cellc2"></td>
+  </tr>
+   <tr>
+    <td id="cella3"></td>
+    <td id="cellb3"></td>
+    <td id="cellc3"></td>
+  </tr>
+</table>
+
+</body>
+</html>
