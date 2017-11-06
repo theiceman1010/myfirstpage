@@ -61,14 +61,14 @@ tr:nth-child(even) {
     </table>
     <div class="center">
     <input type="button" name="b" value="get input text"/>
-	<button onclick="getval()">Get value</button>
+	
     </div>
 </form>
-
+<button onclick="getval()">Get value</button>
   <script>
 
-     function getval() {
-	 var cell1=document.getElementById("cella1");
+function getval(){
+	var cell1=document.getElementById("cella1");
 	var cell2=document.getElementById("cellb1");
 	var cell3=document.getElementById("cellc1");
 	var cell4=document.getElementById("cella2");
@@ -78,15 +78,15 @@ tr:nth-child(even) {
 	var cell8=document.getElementById("cellb3");
 	var cell9=document.getElementById("cellc3");
 
-   
-	for (i=1;i<9;i++) {
-	cell[i].innerHTML=i;
+   var j=[cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9];
+	for (i=0;i<j.length;i++) {
+	var form = document.forms.myform;
+    var elem = form.elements;
+	var elema=parseInt(elem.a.value);
+	j[i].innerHTML=elema+i;
 	}
-	//cell[i].innerHTML=cell1.innerHTML+i;
-	
-}
+	}
 
-
-  </script>
+</script>
 </body>
 </html>
