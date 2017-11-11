@@ -41,7 +41,11 @@ input {
 	<a href="/mysecondpage.html">The second page</a>
 <button onclick="fillcell()">Fill Cell</button>
 <SCRIPT>
-	var request = new XMLHttpRequest();
+	var request;
+	if (windows.XMLHttpRequest) {
+		request =  new XMLHttpRequest();
+	} else {
+		request = new ActiveXObject("Microsoft.XMLHTTP");
 	request.open("GET", "data.txt", false);
 	request.onreadystatechange = function() {
 	if ((request.readyState===4) && (request.status===200)) {
