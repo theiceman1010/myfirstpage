@@ -28,11 +28,11 @@ input {
 </STYLE>
 </HEAD>
 <BODY>
-<div id="searcharea">
+<!-- <div id="searcharea">
 	<label for="search">live search</label>
 	<p>Enter the name or info about a speaker</p>
 	<input type="search" name="search" id="search" placeholder="name or info" />
-</div>
+</div> -->
 <div id="update"></div>
 											</div>
 	</br>
@@ -47,26 +47,42 @@ input {
 	<a href="/mysecondpage.html">The second page</a>
 <button onclick="fillcell()">Fill Cell</button>
 <SCRIPT>
-	$('#search').keyup(function() {
-		var searchField =$('#search').val();
-		var myExp = new RegExp(searchField, "i");
+	
+	var request;
+if (window.XMLHttpRequest) {
+	request = new XMLHttpRequest();
+} else {
+	request = new ActiveXObject("Microsoft.XMLHTTP");
+}
+request.open('GET', 'data.txt');
+request.onreadystatechange = function() {
+	if ((request.readyState===4) && (request.status===200)) {
+		var modify = document.getElementById('update');
+		modify.innerHTML = request.responseText;
+	}
+}
+request.send();
+
+// 	$('#search').keyup(function() {
+// 		var searchField =$('#search').val();
+// 		var myExp = new RegExp(searchField, "i");
 		
-		$.getJSON('data.json', function(data) {
-	var output = '<ul class="searchresults">';
-	$.each(data, function(key, val) {
-		if ((val.name.search(myExp) != -1) || 
-		    (val.bio.search(myExp) != -1)) {
-		output += '<li>';
-		output += '<h2>'+ val.name +'</h2>';
-		output += '<img src="images/'+ val.shortname +'_tn.jpg" alt="'+ val.name +'" />';
-		output += '<p>'+ val.bio +'</p>';
-		output += '</li>';
-		    }
-	});
-	output += '</ul>';
-	$('#update').html(output);
-});
-	});
+// 		$.getJSON('data.json', function(data) {
+// 	var output = '<ul class="searchresults">';
+// 	$.each(data, function(key, val) {
+// 		if ((val.name.search(myExp) != -1) || 
+// 		    (val.bio.search(myExp) != -1)) {
+// 		output += '<li>';
+// 		output += '<h2>'+ val.name +'</h2>';
+// 		output += '<img src="images/'+ val.shortname +'_tn.jpg" alt="'+ val.name +'" />';
+// 		output += '<p>'+ val.bio +'</p>';
+// 		output += '</li>';
+// 		    }
+// 	});
+// 	output += '</ul>';
+// 	$('#update').html(output);
+// });
+// 	});
  //get JSON
 		//saving
 		//document.getElementById('ajaxspace').innerHTML=request.responseText;
