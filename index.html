@@ -31,6 +31,10 @@ input {
 	<a href="/mysecondpage.html">The second page</a>
 <button onclick="fillcell()">Fill Cell</button>
 <SCRIPT>
+	var request = new XMLHttpRequest();
+	request.open("GET", "data.txt", false);
+	request.send();
+	console.log(request);
 
 	localStorage.setItem("mykey", "blank");
 	
