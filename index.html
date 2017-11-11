@@ -28,6 +28,7 @@ input {
 </STYLE>
 </HEAD>
 <BODY>
+	<button onclick="loadAJAX()">Load AJAX</button>
 <div id="update"></div>
 	</br>
 	</br>
@@ -41,6 +42,7 @@ input {
 	<a href="/mysecondpage.html">The second page</a>
 <button onclick="fillcell()">Fill Cell</button>
 <SCRIPT>
+	function loadAJAX() {
 var request;
 if (window.XMLHttpRequest) {
 	request = new XMLHttpRequest();
@@ -60,7 +62,7 @@ request.onreadystatechange = function() {
 	}
 }
 request.send();
-
+	}
 
 		//saving
 		//document.getElementById('ajaxspace').innerHTML=request.responseText;
