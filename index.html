@@ -47,12 +47,12 @@ input {
 	} else {
 		request = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	request.open("GET", "data.txt", false);
+	request.open("GET", "data.xml");
 	request.onreadystatechange = function() {
 	if ((request.readyState===4) && (request.status===200)) {
 		console.log(request.responseXML.getElementsByTagName('name')[1].firstChild.nodeValue);
 		//console.log(request);
-		//ocument.getElementById('ajaxspace').innerHTML=request.responseText;
+		//document.getElementById('ajaxspace').innerHTML=request.responseText;
 	}
 	}
 	request.send();
