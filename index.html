@@ -48,6 +48,8 @@ input {
 <button onclick="fillcell()">Fill Cell</button>
 <SCRIPT>
 	$('#search').keyup(function() {
+		var searchField =$('#search').val();
+		console.log(searchField);
 		$.getJSON('data.json', function(data) {
 	var output = '<ul class="searchresults">';
 	$.each(data, function(key, val) {
