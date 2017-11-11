@@ -36,6 +36,7 @@ input {
 	request.send();
 	if (request.status===200) {
 		console.log(request);
+		document.writeln(request.responseText);
 	}
 	console.log(request);
 
