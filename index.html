@@ -47,7 +47,8 @@ input {
 	<a href="/mysecondpage.html">The second page</a>
 <button onclick="fillcell()">Fill Cell</button>
 <SCRIPT>
-$.getJSON('data.json', function(data) {
+	$('#search').keyup(function() {
+		$.getJSON('data.json', function(data) {
 	var output = '<ul class="searchresults">';
 	$.each(data, function(key, val) {
 		output += '<li>';
@@ -58,7 +59,9 @@ $.getJSON('data.json', function(data) {
 	});
 	output += '</ul>';
 	$('#update').html(output);
-}); //get JSON
+});
+	});
+ //get JSON
 		//saving
 		//document.getElementById('ajaxspace').innerHTML=request.responseText;
 
