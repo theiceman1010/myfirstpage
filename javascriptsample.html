@@ -1,6 +1,8 @@
 <html>
 <head>
 Javascript
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 </head>
   <style>
 table {
@@ -8,13 +10,11 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
-
 tr:nth-child(even) {
     background-color: #dddddd;
 }
@@ -27,7 +27,7 @@ tr:nth-child(even) {
   <li>Show user interaction with the dom (populate the HTML table)</li>
   <li>Create a graph using the table data and a canvas</li>
 </ol> 
-
+<div ng-app="myApp" ng-controller="myCtrl">
 <table>
   <tr>
     <th>Column A</th>
@@ -35,7 +35,7 @@ tr:nth-child(even) {
     <th>Column C</th>
   </tr>
   <tr>
-    <td id="cella1"></td>
+    <td id="cella1">{{firstname}}</td>
     <td id="cellb1"></td>
     <td id="cellc1"></td>
   </tr>
@@ -50,7 +50,7 @@ tr:nth-child(even) {
     <td id="cellc3"></td>
   </tr>
 </table>
-  
+  </div>
   <form name="myform">
     <table border="1" width="100%">
         <tr>
@@ -64,8 +64,76 @@ tr:nth-child(even) {
     </div>
 </form>
 <button onclick="getval()">Get value</button>
-  <script>
 
+<canvas id="myChart" width="400" height="400"></canvas>
+
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    Name: <input ng-model="firstname">
+    <h1>{{firstname}}</h1>
+</div>
+
+
+
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var app = angular.module('myApp', []);
+
+app.controller('myCtrl', function($scope) {
+
+	$scope.firstname=5;
+    $scope.lastname = "Doe";
+	});
+	
+	var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Red", "Blue", "Yellow"],
+        datasets: [{
+            label: '# of Votes',
+            data: [11, 19, 3, 5, 2, 3, 12, 19, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+				   'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+				'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+
+
+</script>
+
+
+  <script>
 function getval(){
 	var cell1=document.getElementById("cella1");
 	var cell2=document.getElementById("cellb1");
@@ -76,7 +144,6 @@ function getval(){
 	var cell7=document.getElementById("cella3");
 	var cell8=document.getElementById("cellb3");
 	var cell9=document.getElementById("cellc3");
-
    var j=[cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9];
 	for (i=0;i<j.length;i++) {
 	var form = document.forms.myform;
@@ -85,7 +152,6 @@ function getval(){
 	j[i].innerHTML=elema+i;
 	}
 	}
-
 </script>
 </body>
 </html>
