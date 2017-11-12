@@ -78,6 +78,7 @@ tr:nth-child(even) {
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var app = angular.module('myApp', []);
+	var celll1=document.getElementById("cella1");
 
 app.controller('myCtrl', function($scope) {
 
@@ -91,7 +92,7 @@ app.controller('myCtrl', function($scope) {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Red", "Blue", "Yellow"],
         datasets: [{
             label: '# of Votes',
-            data: [$scope.firstname, 19, 3, 5, 2, 3, 12, 19, 3],
+            data: [celll1.innerHTML, 19, 3, 5, 2, 3, 12, 19, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
